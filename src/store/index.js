@@ -1,25 +1,34 @@
-import { createStore, applyMiddleware } from 'redux';
-import rootReducer from '../reducers';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunkMiddleware from 'redux-thunk';
-
-const composeEnhancers = composeWithDevTools({
+import {
+    createStore,
+    applyMiddleware,
+  } from 'redux';
+  import { composeWithDevTools } from 'redux-devtools-extension';
+  import thunkMiddleware from 'redux-thunk';
+  import { createPromise } from 'redux-promise-middleware';
+  import logger from 'redux-logger';
+  import rootReducer from '../reducers';
+  
+  const composeEnhancers = composeWithDevTools({
     // Specify name here, actionsCreators and other options if needed here
-});
-
-const storeConfig = () => {
+  });
+  
+  const storeConfig = () => {
     const middlewares = [
-        thunkMiddleware,
+      thunkMiddleware,
+      createPromise(),
+      logger,
     ];
 
     const store = createStore(
-        rootReducer,
-        composeEnhancers(
-            applyMiddleware(...middlewares)
-        ),
+      rootReducer,
+      {},
+      composeEnhancers(
+        applyMiddleware(...middlewares),
+      ),
     );
-
+    
     return store;
-}
-
-export default storeConfig;
+  };
+  
+  export default storeConfig;
+  
