@@ -33,7 +33,7 @@ class SignUpComponent extends Component {
         return(
             <div id="body" className="signup-body">
                 <div className="form-content">
-                    {success ? <Redirect to="/login.html" /> : null}
+                    {success ? <Redirect to="/login" /> : null}
                     <form onSubmit={this.onSignUp}>
                         <Input
                             type="text"
@@ -41,7 +41,7 @@ class SignUpComponent extends Component {
                             id="username"
                             placeholder="Username"
                             onChange={this.handleChange}
-                            defaultValue={username}
+                            value={username}
                             required
                         />
 
@@ -51,7 +51,7 @@ class SignUpComponent extends Component {
                             id="email" 
                             placeholder="Email"
                             onChange={this.handleChange}
-                            defaultValue={email}
+                            value={email}
                             required
                         />
 
@@ -61,7 +61,7 @@ class SignUpComponent extends Component {
                             id="password"
                             placeholder="Password"
                             onChange={this.handleChange}
-                            defaultValue={password}
+                            value={password}
                             required
                         />
 
@@ -71,7 +71,7 @@ class SignUpComponent extends Component {
                             id="confirm_password"
                             placeholder="Confirm Password"
                             onChange={this.handleChange}
-                            defaultValue={confirm_password}
+                            value={confirm_password}
                             required
                         />
 
