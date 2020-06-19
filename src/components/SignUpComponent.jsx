@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'proptypes';
-import Input from './input';
+import Input from './Input';
 
 class SignUpComponent extends Component {
     state = {
