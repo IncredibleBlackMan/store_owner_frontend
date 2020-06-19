@@ -1,9 +1,9 @@
 import api from '../api';
 import constants from '../constants';
 
-const { CREATE_PRODUCT, LIST_PRODUCTS } = constants;
+const { CREATE_PRODUCT, LIST_PRODUCTS, GET_PRODUCT } = constants;
 
-export const createProduct = credentials => ({
+export const createProductAction = credentials => ({
     type: CREATE_PRODUCT,
     payload: api({
         url: '/products',
@@ -16,6 +16,14 @@ export const listProducts = () => ({
     type: LIST_PRODUCTS,
     payload: api({
         url: '/products',
+        method: 'GET',
+    }),
+});
+
+export const fetchProductAction = (id) => ({
+    type: GET_PRODUCT,
+    payload: api({
+        url: `/products/${id}`,
         method: 'GET',
     }),
 });

@@ -18,4 +18,9 @@ export default {
         success: false,
         products: [],
     },
+    options: {
+        loading: false,
+        success: false,
+        message: {},
+    },
 };

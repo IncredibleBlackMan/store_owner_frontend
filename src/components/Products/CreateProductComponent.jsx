@@ -4,28 +4,42 @@ import PropTypes from 'proptypes';
 import Input from '../Input';
 
 const CreateProductComponent = (props) => {
-    const [productDetails, setProductDetails] = useState({});
-    const { success, error } = props;
-
+    const [productDetails, setProductDetails] = useState({
+        subtype: ""
+    });
+    const { createProduct } = props;
+    const { success, error, product} = createProduct;
     const handleChange = (event) => {
         setProductDetails({...productDetails, [event.target.name]: event.target.value})
     }
 
-    const handleSubtypeChange = (event) => {
-        setProductDetails({...productDetails, [event.target.name]: [event.target.value]})
+    const [chipArray, setChipArray] = useState([])
+
+    const handleKeyPress = (e) => {
+        if(e.key === 'Enter' && productDetails.subtype !== ""){
+            setChipArray((prevArr) => [...prevArr, productDetails.subtype])
+            setProductDetails({
+                ...productDetails,
+                subtype: ""                
+            })
+        }
     }
 
     const onCreateProduct = (event) => {
         event.preventDefault();
-        const { createProduct } = props;
-        createProduct(productDetails)
-    }
+        const { createProductAction } = props;
+        createProductAction({
+            name: productDetails.name,
+            subtypes: chipArray
+        })
+    }    
+
 
     return(
         <div id="body" className="create-product">
             <div className="form-content">
-                {success ? <Redirect to="/login.html" /> : null}
-                <form onSubmit={onCreateProduct}>
+                {success ? <Redirect to={`/products/${product.id}`} /> : null}
+                <form>
                     <Input
                         type="text" 
                         name="name" 
@@ -37,17 +51,20 @@ const CreateProductComponent = (props) => {
 
                     <Input
                         type="text"
-                        name="subtypes"
-                        id="subtypes"
+                        name="subtype"
+                        id="subtype"
                         placeholder="Subtypes"
-                        onChange={handleSubtypeChange}
+                        onChange={handleChange}
                         required
+                        onKeyPress={handleKeyPress}
+                        value={productDetails.subtype}
                     />
 
                     <Input 
-                        type="submit"
+                        type="button"
                         value= "Save"
                         className="submit-btn"
+                        onClick={onCreateProduct}
                     />
                 </form>
                 <div>
@@ -59,9 +76,9 @@ const CreateProductComponent = (props) => {
 }
 
 CreateProductComponent.propTypes = {
-    createProduct: PropTypes.func.isRequired,
-    success: PropTypes.bool.isRequired,
-    error: PropTypes.shape({}).isRequired,
+    createProduct: PropTypes.shape({
+        success: PropTypes.bool.isRequired,
+    }).isRequired
 }
 
 export default CreateProductComponent;
