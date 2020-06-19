@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import constants from '../constants';
 import initialState from './initialState';
 
-const { CREATE_PRODUCT, LIST_PRODUCTS } = constants;
+const { CREATE_PRODUCT, LIST_PRODUCTS, GET_PRODUCT } = constants;
 
 const createProduct = (state = initialState.product, action) => {
     const { payload, type } = action;
@@ -18,9 +18,40 @@ const createProduct = (state = initialState.product, action) => {
                 ...state,
                 loading: false,
                 success: true,
-                message: payload.data.message,
+                product: payload.data.product,
             };
         case `${CREATE_PRODUCT}_REJECTED`:
+            return {
+                ...state,
+                loading: false,
+                success: false,
+                error: payload,
+            };
+        default:
+            return state;
+    }
+};
+
+const fetchProduct = (state = initialState.product, action) => {
+    const { payload, type } = action;
+
+    switch (type) {
+        case `${GET_PRODUCT}_PENDING`:
+            return {
+                ...state,
+                loading: true,
+            };
+        case `${GET_PRODUCT}_FULFILLED`:
+            return {
+                ...state,
+                loading: false,
+                success: true,
+                product: {
+                    ...payload.data.product,
+                    subtypes: payload.data.product.subtypes,
+                }
+            };
+        case `${GET_PRODUCT}_REJECTED`:
             return {
                 ...state,
                 loading: false,
@@ -62,5 +93,6 @@ const listProducts = (state = initialState.listProducts, action) => {
 
 export default combineReducers({
     createProduct,
+    fetchProduct,
     listProducts
 })
