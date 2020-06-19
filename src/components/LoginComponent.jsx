@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'proptypes';
-import Input from './input';
+import Input from './Input';
 
 const LoginComponent = (props) => {
     const [loginDetails, setLoginDetails] = useState({});
@@ -20,7 +20,7 @@ const LoginComponent = (props) => {
     return(
         <div id="body" className="login-body">
             <div className="form-content">
-                {success ? <Redirect to="/login.html" /> : null}
+                {success ? <Redirect to="/products" /> : null}
                 <form onSubmit={onLogin}>
                     <Input
                         type="text" 

@@ -1,6 +1,8 @@
 const CONSTANTS = {
     SIGNUP: 'SIGNUP',
     LOGIN: 'LOGIN',
+    CREATE_PRODUCT: 'CREATE_PRODUCT',
+    LIST_PRODUCTS: 'LIST_PRODUCTS',
 };
 
 export default CONSTANTS

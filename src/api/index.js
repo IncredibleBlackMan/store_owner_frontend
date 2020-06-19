@@ -11,10 +11,10 @@ export const authUser = () => {
 };
 
 export const authUserHeader = () => {
-    const user = authUser();
-    if (user && user.token) {
+    const token = authUser();
+    if (token) {
         return {
-            Authorization: user.token,
+            Authorization: token,
         };
     }
     return {};
