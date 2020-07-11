@@ -17,31 +17,39 @@ const ListProductsComponent = (props) => {
                             {
                                 products.map(product => (
                                     <div>
-                                        <h1>{product.product_name}</h1>
+                                        <h1><a href={`/products/${product.product_id}`}>{product.product_name}</a></h1>
                                         <p>Total Units: {product.quantity}</p>
-                                        <table>
-                                            <tr>
-                                                <th>Sub-Type</th>
-                                                <th>Price</th>
-                                                <th>Quantity</th>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    {product.subtype_options.map(option =>(
-                                                        <span>{option.subtype_name} : {option.name}</span>
-                                                    ))
-                                                    }
-                                                </td>
-                                                <td>{product.price}</td>
-                                                <td>{product.quantity}</td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                        
+                                                
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sub-Type</th>
+                                                                <th>Price</th>
+                                                                <th>Quantity</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {product.subtype_options.map(option => (
+                                                                <tr>
+                                                                <td>
+                                                                    {option.subtype_options.map(option_price => (
+                                                                        <span>{option_price.subtype_name} : {option_price.name}</span>
+                                                                    ))}
+                                                                </td>
+                                                                <td>{option.price}</td>
+                                                                <td>{option.quantity}</td>
+                                                            </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </table>
+                                            </div>
                                 ))
                             }
                         </div>
                     ) : <div className="no-data"><p>You have not created any products yet</p></div>
                 }
+                <a href="/create">Create Products</a>
             </div>
         </div>
     );
