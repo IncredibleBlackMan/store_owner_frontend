@@ -3,20 +3,22 @@ import constants from '../constants';
 
 const { CREATE_OPTIONS, PRICE_OPTIONS } = constants;
 
-export const createOptionsAction = (program_id, subtype_id, data) => ({
+export const createOptionsAction = (product_id, subtype_id, data) => ({
     type: CREATE_OPTIONS,
     payload: api({
-        url: `/products/${program_id}/subtypes/${subtype_id}/subtype_options`,
+        url: `/products/${product_id}/subtypes/${subtype_id}/subtype_options`,
         method: 'POST',
-        data: { options: [data] },
+        data: { options: data },
     }),
 });
 
-export const priceOptionsAction = (program_id, data) => ({
-    type: PRICE_OPTIONS,
-    payload: api({
-        url: `/products/${program_id}/subtype_options_pricing`,
-        method: 'POST',
-        data: { subtype_pricing: data },
-    }),
-});
+export const priceOptionsAction = (product_id, data) => {
+    return{
+        type: PRICE_OPTIONS,
+        payload: api({
+            url: `/products/${product_id}/subtype_option_pricing`,
+            method: 'POST',
+            data: { subtype_pricing: data },
+        }),
+    }
+};

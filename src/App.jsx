@@ -6,7 +6,6 @@ import createProductContainer from './containers/createProductContainer';
 import singleProductContainer from './containers/singleProductContainer';
 import listProductsContainer from './containers/listProductsContainer';
 import createOptionsContainer from './containers/createOptionsContainer';
-import priceOptionsContainer from './containers/priceOptionsContainer';
 
 import './App.scss';
 
@@ -20,7 +19,6 @@ function App() {
         <Route path="/products" exact component={listProductsContainer} />
         <Route path="/products/:id" exact component={singleProductContainer} />
         <Route path="/products/:product_id/subtypes/:subtype_id/subtype_options" exact component={createOptionsContainer} />
-        <Route path="/products/:product_id/subtype_option_pricing" exact component={priceOptionsContainer} />
       </Switch>
     </div>
   );

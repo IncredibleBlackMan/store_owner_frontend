@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import PropTypes from 'proptypes';
 import Input from './Input';
 
@@ -27,13 +27,13 @@ class SignUpComponent extends Component {
       }
 
     render () {
-        const { success, error } = this.props;
+        const { success, error, history } = this.props;
         const { errors } = error ? error.response.data : { errors: '' };
         const { username, email, password, confirm_password } = this.state;
         return(
             <div id="body" className="signup-body">
                 <div className="form-content">
-                    {success ? <Redirect to="/login" /> : null}
+                    {success ? history.push("/login") : null}
                     <form onSubmit={this.onSignUp}>
                         <Input
                             type="text"

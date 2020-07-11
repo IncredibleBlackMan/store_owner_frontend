@@ -20,7 +20,7 @@ const LoginComponent = (props) => {
     return(
         <div id="body" className="login-body">
             <div className="form-content">
-                {success ? <Redirect to="/products" /> : null}
+                {success ? <Redirect to={"/products"} /> : null}
                 <form onSubmit={onLogin}>
                     <Input
                         type="text" 

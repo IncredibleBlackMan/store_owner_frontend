@@ -26,17 +26,20 @@ const CreateOptionsComponent = (props) => {
 
     const onCreateOptions = (event) => {
         event.preventDefault();
-        const { createOptionsAction } = props;
-        createOptionsAction({
-            options: chipArray
-        })
+        const { createOptionsAction, match } = props;
+        createOptionsAction(
+            match.params.product_id,
+            match.params.subtype_id,
+            chipArray
+        )
     }
 
+    console.log (chipArray);
 
     return(
         <div id="body" className="create-product">
             <div className="form-content">
-                {success ? <Redirect to={`/products`} /> : null}
+                {success ? <Redirect to="/products" /> : null}
                 <form>
                     <Input
                         type="text"
